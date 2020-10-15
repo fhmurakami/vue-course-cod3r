@@ -1,0 +1,24 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <p>{{ counter }}</p>
+    <!-- <button v-on:click="sum">+1</button> -->
+    <button @click="sum">+1</button>
+    <hr>
+    <!-- <input type="text" v-bind:value="counter"> -->
+    <input type="text" :value="counter">
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0
+        },
+        methods: {
+            sum() {
+                this.counter++
+            }
+        }
+    })
+</script>
