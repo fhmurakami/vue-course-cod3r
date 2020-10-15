@@ -1,0 +1,22 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="challenge">
+  <!-- 1) Exibir em "result" o texto 'Valor Diferente' enquanto
+        "value" for diferente de 37 - "value" é alterado pelos botões.
+        Mostrar 'Valor Igual' quando "value" for igual a 37 -->
+  <!-- 1) Show in "result" the text 'Different Value' as long as
+        "value" is different from 37 - "value" is changed by the buttons.
+        Show 'Equal Value' when "value" equals to 37 -->
+
+  <!-- 2) Monitorar as mudança de "result" e reiniciar "value"
+        para 0 depois de 5 segundos (dica: setTimeout(..., 5000) -->
+  <!-- 2) Monitor changes in "result" and reset "value"
+        to 0 after 5 seconds (hint: setTimeout(..., 5000) -->
+  <div>
+    <p>Current value: {{ value }}</p>
+    <button @click="value += 5">+ 5</button>
+    <button @click="value += 1">+ 1</button>
+    <p>{{ result }}</p>
+  </div>
+</div>
+<script src="app.js"></script>
