@@ -1,0 +1,30 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <template v-if="logged">
+    <p>Logged User: {{ name }}</p>
+    <p>Role: Admin</p>
+  </template>
+  <p v-else-if="guest">Browsing as a Guest</p>
+  <p v-else>No users logged in</p>
+  <button @click="logged = !logged">
+    {{ logged ? 'Exit' : 'Login' }}
+  </button>
+  <input type="checkbox" v-model="guest">
+  <hr>
+  <footer v-show="logged">
+    Developed for you!
+  </footer>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      name: 'Maria',
+      logged: false,
+      guest: false
+    }
+  })
+</script>
