@@ -52,3 +52,18 @@ html {
 }
 
 /* Result Area */
+.result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.result .win {
+  color: green;
+}
+
+.result .lose {
+  color: red;
+}
