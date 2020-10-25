@@ -12,6 +12,17 @@ new Vue({
       min: 7,
       max: 12,
     },
+    playerLog: {
+      source: 'Player',
+      target: 'Monster',
+      class: 'player'
+    },
+    monsterLog: {
+      source: 'Monster',
+      target: 'Player',
+      class: 'monster'
+    },
+    logs: [],
   },
   computed: {
     hasResult() {
@@ -28,28 +39,39 @@ new Vue({
       this.gameStarted = false;
     },
     attack(type = "normal") {
-      this.damage("monsterLife", this.playerAttack, type);
-      this.damage("playerLife", this.monsterAttack);
+      this.damage("monsterLife", this.playerAttack, this.playerLog, type);
+
+      if (this.monsterLife > 0) {
+        this.damage("playerLife", this.monsterAttack, this.monsterLog);
+      }
     },
     heal() {
       const playerHeal = {
         min: 10,
         max: 15,
       };
-      const heal = this.getRandom(playerHeal.min, playerHeal.max)
+      const heal = this.getRandom(playerHeal.min, playerHeal.max);
 
-      this.playerLife += heal 
-      this.damage("playerLife", this.monsterAttack)
+      this.playerLife += heal;
+      this.damage("playerLife", this.monsterAttack, this.monsterLog);
       this.playerLife = Math.min(this.playerLife, 100);
+      this.registerLog(`Player healed ${heal} of life.`, 'player')
     },
-    damage(target, attack, type = "normal") {
+    damage(target, attack, logAttributes, type = "normal") {
       const bonus = type == "special" ? 5 : 0;
       const damage = this.getRandom(attack.min + bonus, attack.max + bonus);
 
       this[target] = Math.max(this[target] - damage, 0);
+      this.registerLog(
+        `${logAttributes.source} caused ${damage} of damage on ${logAttributes.target}.`,
+        logAttributes.class
+      );
     },
     getRandom(min, max) {
       return Math.round(Math.random() * (max - min + 1)) + min;
+    },
+    registerLog(text, logClass) {
+      this.logs.unshift({ text, logClass });
     },
   },
   watch: {
