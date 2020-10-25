@@ -4,6 +4,14 @@ new Vue({
     playerLife: 100,
     monsterLife: 100,
     gameStarted: false,
+    playerAttack: {
+      min: 5,
+      max: 10,
+    },
+    monsterAttack: {
+      min: 7,
+      max: 12,
+    },
   },
   computed: {
     hasResult() {
@@ -20,18 +28,19 @@ new Vue({
       this.gameStarted = false;
     },
     attack(type = "normal") {
-      playerAttack = {
-        min: 5,
-        max: 10,
+      this.damage("monsterLife", this.playerAttack, type);
+      this.damage("playerLife", this.monsterAttack);
+    },
+    heal() {
+      const playerHeal = {
+        min: 10,
+        max: 15,
       };
+      const heal = this.getRandom(playerHeal.min, playerHeal.max)
 
-      monsterAttack = {
-        min: 7,
-        max: 12,
-      };
-
-      this.damage("monsterLife", playerAttack, type);
-      this.damage("playerLife", monsterAttack);
+      this.playerLife += heal 
+      this.damage("playerLife", this.monsterAttack)
+      this.playerLife = Math.min(this.playerLife, 100);
     },
     damage(target, attack, type = "normal") {
       const bonus = type == "special" ? 5 : 0;
