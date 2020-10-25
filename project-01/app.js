@@ -20,38 +20,32 @@ new Vue({
       this.gameStarted = false;
     },
     attack(type = "normal") {
-      let playerMin;
-      let playerMax;
-      if (type == "special") {
-        playerMin = 10;
-        playerMax = 20;
-      } else {
-        playerMin = 5;
-        playerMax = 15;
-      }
+      playerAttack = {
+        min: 5,
+        max: 10,
+      };
 
-      let monsterMin = 5;
-      let monsterMax = 20;
+      monsterAttack = {
+        min: 7,
+        max: 12,
+      };
 
-      let playerAttack =
-        Math.floor(Math.random() * (playerMax - playerMin + 1)) + playerMin;
-      let monsterAttack =
-        Math.floor(Math.random() * (monsterMax - monsterMin + 1)) + monsterMin;
+      this.damage("monsterLife", playerAttack, type);
+      this.damage("playerLife", monsterAttack);
+    },
+    damage(target, attack, type = "normal") {
+      const bonus = type == "special" ? 5 : 0;
+      const damage = this.getRandom(attack.min + bonus, attack.max + bonus);
 
-      this.monsterLife -= playerAttack;
-
-      if (this.monsterLife <= 0) {
-        this.monsterLife = 0;
-        this.gameStarted = false;
-      }
-
-      this.playerLife -= monsterAttack;
-
-      if (this.playerLife <= 0) {
-        this.playerLife = 0;
-        this.gameStarted = false;
-      }
+      this[target] = Math.max(this[target] - damage, 0);
+    },
+    getRandom(min, max) {
+      return Math.round(Math.random() * (max - min + 1)) + min;
     },
   },
-  watch: {},
+  watch: {
+    hasResult(value) {
+      if (value) this.gameStarted = false;
+    },
+  },
 });
