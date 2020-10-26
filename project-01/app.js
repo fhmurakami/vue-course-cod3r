@@ -13,14 +13,14 @@ new Vue({
       max: 12,
     },
     playerLog: {
-      source: 'Player',
-      target: 'Monster',
-      class: 'player'
+      source: "Player",
+      target: "Monster",
+      class: "player",
     },
     monsterLog: {
-      source: 'Monster',
-      target: 'Player',
-      class: 'monster'
+      source: "Monster",
+      target: "Player",
+      class: "monster",
     },
     logs: [],
   },
@@ -34,6 +34,7 @@ new Vue({
       this.gameStarted = true;
       this.playerLife = 100;
       this.monsterLife = 100;
+      this.logs = [];
     },
     endGame() {
       this.gameStarted = false;
@@ -53,9 +54,9 @@ new Vue({
       const heal = this.getRandom(playerHeal.min, playerHeal.max);
 
       this.playerLife += heal;
+      this.registerLog(`Player healed ${heal} of life.`, "player");
       this.damage("playerLife", this.monsterAttack, this.monsterLog);
       this.playerLife = Math.min(this.playerLife, 100);
-      this.registerLog(`Player healed ${heal} of life.`, 'player')
     },
     damage(target, attack, logAttributes, type = "normal") {
       const bonus = type == "special" ? 5 : 0;
