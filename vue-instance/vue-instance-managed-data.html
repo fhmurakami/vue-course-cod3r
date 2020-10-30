@@ -1,0 +1,24 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  {{ title }} {{ newInfo }}
+  <button @click="modifyTitle">Modify Text</button>
+</div>
+
+<script>
+  const vm1 = new Vue({
+    el: '#app',
+    data: {
+      title: 'Test 1'
+    },
+    methods: {
+      modifyTitle() {
+        this.title += '!'
+      }
+    }
+  })
+
+  vm.newInfo = 'Test'
+  console.log(vm.newInfo)
+</script>
