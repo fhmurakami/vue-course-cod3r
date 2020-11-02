@@ -1,20 +1,13 @@
 <template>
   <div id="app">
     <h1>Contadores</h1>
-    <p>{{ counter }}</p>
+    <app-counter></app-counter>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      counter: 0
-    }
-  }
-}
+export default {};
 </script>
 
 <style>
-
 </style>
