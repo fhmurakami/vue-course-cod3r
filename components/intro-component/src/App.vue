@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <h1>Contadores</h1>
-    <app-counter></app-counter>
+    <app-counters></app-counters>
   </div>
 </template>
 
