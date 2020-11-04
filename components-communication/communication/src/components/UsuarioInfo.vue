@@ -8,7 +8,17 @@
 
 <script>
 export default {
-    props: ['nome'],
+    props: {
+        nome: {
+            type: String,
+            // É possível retornar o valor default através de uma função. Ex.:
+            // default: function () {
+                //     return Array(10).fill(0).join(',')
+            // }
+            default: 'Anônimo'
+            // required: true
+        }
+    },
     methods: {
         inverterNome() {
             return this.nome.split('').reverse().join('')
