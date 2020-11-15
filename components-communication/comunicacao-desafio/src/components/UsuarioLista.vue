@@ -11,7 +11,7 @@
         <tr
           v-for="usuario in usuarios"
           :key="usuario.id"
-          @click="selecionaUsuario(usuario.id)"
+          @click="setUsuarioSelecionado(usuario)"
         >
           <td>{{ usuario.id }}</td>
           <td>{{ usuario.nome }}</td>
@@ -22,11 +22,13 @@
 </template>
 
 <script>
+import barramento from "@/barramento";
+
 export default {
   props: { usuarios: Array },
   methods: {
-    selecionaUsuario(id) {
-      this.$emit("usuarioSelecionado", id);
+    setUsuarioSelecionado(usuario) {
+      barramento.setUsuarioSelecionado(usuario);
     },
   },
 };
